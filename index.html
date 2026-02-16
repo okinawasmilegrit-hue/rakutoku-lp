@@ -150,7 +150,6 @@
                         <div class="relative group">
                             <div class="absolute inset-0 bg-white/20 rounded-3xl blur-xl group-hover:bg-white/30 transition-all"></div>
                             <div class="relative glass-card border border-white/50 p-3 rounded-3xl shadow-2xl">
-                                <!-- Changed to Child Image -->
                                 <img src="https://rakutokuwater.smilegrit.com/wp-content/uploads/2026/02/琉宮祭LP素材.png" 
                                      alt="Happy Child Icon" 
                                      class="h-48 md:h-64 w-auto object-contain drop-shadow-xl animate-float"
@@ -161,7 +160,6 @@
                             </div>
                         </div>
                         <div class="relative glass-card border border-white/40 p-4 rounded-2xl shadow-xl max-w-[280px]">
-                            <!-- Filter System Image -->
                             <img src="https://rakutokuwater.smilegrit.com/wp-content/uploads/2026/02/①-②-③-④-⑤-1.png" 
                                  alt="5-Stage Filter System" 
                                  class="w-full h-auto object-contain rounded-lg shadow-sm mb-3"
@@ -290,7 +288,6 @@
                     <div class="relative group">
                         <div class="absolute inset-0 bg-white/20 rounded-[3rem] blur-xl group-hover:bg-white/30 transition-all"></div>
                         <div class="relative rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white transform -rotate-2">
-                            <!-- サーバーの画像を新しい画像URLに変更 -->
                             <img src="https://rakutokuwater.smilegrit.com/wp-content/uploads/2026/02/琉宮祭LP素材-1.png" 
                                  alt="Smile of Happiness" 
                                  class="w-full h-auto object-cover aspect-[4/3]"
@@ -306,7 +303,7 @@
                 <div class="w-full md:w-1/2 text-left space-y-8">
                     <h2 class="text-3xl md:text-5xl font-black text-slate-800 leading-tight">
                         「お水ちょうだい！」<br>
-                        が、増える喜び。
+                        が, 増える喜び。
                     </h2>
                     <p class="text-lg md:text-xl text-slate-600 leading-relaxed">
                         不純物はしっかり取り除きながら、<br class="hidden md:block">
@@ -531,9 +528,15 @@
 
         function toggleFaq(btn) {
             const content = btn.nextElementSibling;
-            const icon = btn.querySelector('i');
-            content.classList.toggle('hidden');
-            icon.classList.toggle('rotate-180');
+            // Lucide icons are replaced by SVGs, so query for both i and svg
+            const icon = btn.querySelector('svg') || btn.querySelector('i');
+            
+            if (content) {
+                content.classList.toggle('hidden');
+            }
+            if (icon) {
+                icon.classList.toggle('rotate-180');
+            }
         }
     </script>
 </body>

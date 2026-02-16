@@ -1,479 +1,530 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  Droplets, 
-  ShieldCheck, 
-  Leaf, 
-  PhoneCall, 
-  CheckCircle2, 
-  ChevronRight, 
-  Waves,
-  Filter,
-  ArrowRight,
-  Menu,
-  X,
-  QrCode,
-  Sparkles
-} from 'lucide-react';
-
-const App = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  // 申し込みリンク
-  const SIGNUP_LINK = "https://liff.line.me/1656783300-KLG90La1/landing?follow=%40248vmjzs&lp=ksthV0&liff_id=1656783300-KLG90La1";
-
-  // ==============================================
-  // ★ 画像の設定エリア (v1.1: CloudFront URL)
-  // ==============================================
-  const images = {
-    // モデルさん（背景透過）
-    model: "https://d27rnpuamwvieu.cloudfront.net/0KojVXtPX1AcetyskRPuWzgXX/normal", 
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ラクトクウォーター | 沖縄の水を前提に設計した五段階フィルター</title>
+    <meta name="description" content="県外と同じ水の考え方では、沖縄の水は語れない。沖縄の水質を前提に設計した五段階フィルターのラクトクウォーター。琉宮祭限定無料体験実施中。">
     
-    // フィルター画像
-    filter: "https://d27rnpuamwvieu.cloudfront.net/0eEiSNJu3uTVWwzfu8JmoHgXX/normal",
-
-    // サーバー画像
-    server: "https://d27rnpuamwvieu.cloudfront.net/0X3bkS2LfWZ8U71OIZoZWJQXX/normal",
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
     
-    // お子様の写真（笑顔のおいしさ）
-    child: "https://d27rnpuamwvieu.cloudfront.net/0x2X6lRrjjgT9vKSnE95n4gXX/normal",
-  };
+    <!-- Lucide Icons (CDN) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
 
-  const scrollToCta = () => {
-    const ctaSection = document.getElementById('cta-section');
-    if (ctaSection) {
-      ctaSection.scrollIntoView({ behavior: 'smooth' });
-    }
-    setIsMenuOpen(false);
-  };
-
-  return (
-    <div className="font-sans text-slate-700 bg-slate-50 min-h-screen selection:bg-cyan-200 selection:text-cyan-900">
-      
-      {/* Navigation */}
-      <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white/95 shadow-md py-3' : 'bg-transparent py-4'}`}>
-        <div className="container mx-auto px-4 md:px-8 flex justify-between items-center">
-          <div className="flex items-center gap-2 group cursor-pointer">
-            <div className={`p-1 rounded-full ${isScrolled ? 'bg-[#00A0E9] text-white' : 'bg-white text-[#00A0E9]'}`}>
-              <Waves className="w-5 h-5" />
-            </div>
-            <span className={`font-bold text-lg tracking-wider ${isScrolled ? 'text-[#00A0E9]' : 'text-white drop-shadow-md'}`}>
-              RakuToku Water
-            </span>
-          </div>
-          
-          <div className="hidden md:flex items-center gap-6">
-            <a 
-              href={SIGNUP_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`px-6 py-2 rounded-full text-sm font-bold transition-all duration-300 shadow-lg ${isScrolled ? 'bg-[#00A0E9] text-white hover:bg-[#008CC9]' : 'bg-white text-[#00A0E9] hover:bg-slate-100'}`}
-            >
-              無料体験に申し込む
-            </a>
-          </div>
-
-          <button className={`md:hidden ${isScrolled ? 'text-[#00A0E9]' : 'text-white'}`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            {isMenuOpen ? <X /> : <Menu />}
-          </button>
-        </div>
-      </nav>
-
-      {/* Mobile Menu Overlay */}
-      {isMenuOpen && (
-        <div className="fixed inset-0 bg-white z-40 flex flex-col items-center justify-center space-y-8 animate-fade-in md:hidden">
-          <span className="text-xl font-bold text-slate-800" onClick={scrollToCta}>コンセプト</span>
-          <span className="text-xl font-bold text-slate-800" onClick={scrollToCta}>5つのフィルター</span>
-          <a 
-            href={SIGNUP_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-[#00A0E9] text-white px-8 py-3 rounded-full text-lg font-bold shadow-lg"
-          >
-            無料で試す
-          </a>
-        </div>
-      )}
-
-      {/* Hero Section */}
-      <header className="relative min-h-[90vh] pt-24 pb-0 overflow-hidden bg-gradient-to-b from-[#40C4FF] to-[#0091EA]">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/diamond-upholstery.png')]"></div>
+    <!-- Custom Config & Styles -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#00A0E9',
+                            dark: '#006899',
+                            light: '#E0F2FE',
+                            accent: '#F59E0B',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans JP', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Noto Sans JP', sans-serif; }
         
-        {/* ★ z-20 を追加して、コンテンツ全体を最前面に配置 */}
-        <div className="container mx-auto px-4 md:px-8 relative z-20 h-full flex flex-col md:flex-row items-center">
-          
-          {/* Left Side: Copy & Features & Product */}
-          <div className="w-full md:w-3/5 text-center md:text-left z-20 pb-12 md:pb-0">
+        /* アニメーション定義 */
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up { animation: fade-in-up 0.8s ease-out forwards; }
+
+        @keyframes bounce-slow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-bounce-slow { animation: bounce-slow 3s infinite ease-in-out; }
+    </style>
+</head>
+<body class="text-slate-700 bg-slate-50 selection:bg-brand-light selection:text-brand-dark">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm py-3 transition-all duration-300">
+        <div class="container mx-auto px-4 md:px-8 flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center gap-2 group cursor-pointer">
+                <div class="p-1.5 rounded-full bg-brand-blue text-white">
+                    <i data-lucide="waves" class="w-5 h-5"></i>
+                </div>
+                <span class="font-bold text-lg md:text-xl tracking-wider text-brand-blue">
+                    RakuToku Water
+                </span>
+            </div>
             
-            {/* Main Copy (v1時点の状態) */}
-            <div className="mb-8 animate-fade-in-up">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight drop-shadow-md mb-2">
-                県外とは水質が違う、<br />
-                <span className="inline-block transform hover:scale-105 transition-transform duration-500 text-5xl md:text-7xl">沖縄の水。</span>
-              </h1>
-              <div className="w-full h-0.5 bg-white/50 my-4 rounded-full"></div>
-              <p className="text-white text-lg md:text-2xl font-bold tracking-wide drop-shadow-sm">
-                その違いを前提に設計した5段階フィルター。
-              </p>
+            <!-- Desktop Button -->
+            <div class="hidden md:block">
+                <a href="https://liff.line.me/1656783300-KLG90La1/landing?follow=%40248vmjzs&lp=ksthV0&liff_id=1656783300-KLG90La1" 
+                   target="_blank" 
+                   class="bg-brand-blue hover:bg-brand-dark text-white font-bold py-2 px-6 rounded-full shadow-lg transition-transform transform hover:scale-105 flex items-center gap-2">
+                   無料で試してみる <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                </a>
             </div>
 
-            {/* 3 Blue Feature Boxes (Flyer Style) */}
-            <div className="flex flex-col gap-3 mb-10 max-w-lg mx-auto md:mx-0">
-              <FlyerFeatureBox text="ミネラルを残して 軟水化" />
-              <FlyerFeatureBox text="有機フッ素化合物 対策" />
-              <FlyerFeatureBox text="活性炭 ダブル構造" />
-            </div>
+            <!-- Mobile Menu Icon (Placeholder) -->
+            <button class="md:hidden text-brand-blue">
+                <i data-lucide="menu" class="w-7 h-7"></i>
+            </button>
+        </div>
+    </nav>
 
-            {/* Product Area: Server & Filters */}
-            <div className="flex flex-col sm:flex-row items-end justify-center md:justify-start gap-6 md:gap-8">
-               {/* Server Image Area */}
-               <div className="relative w-32 md:w-40 flex flex-col items-center">
-                 {/* ★ 装飾レイヤーを背面に配置 (absolute z-0) */}
-                 <div className="absolute inset-0 bg-white/20 backdrop-blur-sm rounded-2xl shadow-xl border border-white/30 z-0"></div>
-                 
-                 {/* ★ 画像レイヤーを前面に配置 (relative z-10) */}
-                 <div className="relative z-10 w-full p-2 flex flex-col items-center">
-                     <SmartImage 
-                       src={images.server}
-                       fallbackSrc="https://placehold.co/150x300/f8fafc/cbd5e1?text=Server" 
-                       alt="ウォーターサーバー"
-                       className="w-full h-auto object-contain drop-shadow-lg"
-                     />
-                     <div className="mt-2 text-white text-[10px] font-bold tracking-widest opacity-80">RakuToku</div>
-                 </div>
-               </div>
+    <!-- FV (First View) -->
+    <header class="relative pt-24 pb-16 md:pt-32 md:pb-24 overflow-hidden bg-gradient-to-b from-[#40C4FF] to-brand-blue">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-10" style="background-image: url('https://www.transparenttextures.com/patterns/diamond-upholstery.png');"></div>
 
-               {/* Filter Image Area */}
-               <div className="relative flex-1 max-w-sm">
-                 {/* ★ 装飾レイヤーを背面に配置 (absolute z-0) */}
-                 <div className="absolute inset-0 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 shadow-lg z-0"></div>
-
-                 {/* ★ 画像レイヤーを前面に配置 (relative z-10) */}
-                 <div className="relative z-10 p-3">
-                    <SmartImage 
-                      src={images.filter}
-                      fallbackSrc="https://placehold.co/400x150/ffffff/00a0e9?text=Filter+Structure"
-                      alt="5段階フィルター"
-                      className="w-full h-auto object-contain rounded"
-                    />
-                    <div className="mt-2 text-center">
-                      <div className="bg-white text-[#00A0E9] text-xs font-bold py-1 px-4 rounded-full shadow-sm inline-block">
-                        沖縄仕様フィルター構成（5段階）
-                      </div>
+        <div class="container mx-auto px-4 md:px-8 relative z-10">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
+                
+                <!-- Left: Copy & Info -->
+                <div class="w-full md:w-3/5 text-center md:text-left text-white space-y-6">
+                    
+                    <div class="animate-fade-in-up">
+                        <h1 class="text-3xl md:text-5xl lg:text-6xl font-black leading-tight drop-shadow-md">
+                            県外と同じ水の考え方では、<br/>
+                            <span class="text-yellow-200 inline-block transform -rotate-1 mt-2 text-4xl md:text-6xl lg:text-7xl">沖縄の水</span>は語れない。
+                        </h1>
+                        <div class="w-24 h-1 bg-white/50 my-6 mx-auto md:mx-0 rounded-full"></div>
+                        <p class="text-lg md:text-2xl font-bold opacity-95">
+                            沖縄の水質を前提に設計した<br class="md:hidden"/>
+                            五段階フィルターのラクトクウォーター
+                        </p>
                     </div>
-                 </div>
-               </div>
+
+                    <!-- Tags -->
+                    <div class="flex flex-wrap justify-center md:justify-start gap-3 text-brand-blue text-sm md:text-base font-bold animate-fade-in-up" style="animation-delay: 0.2s;">
+                        <span class="bg-white px-4 py-2 rounded-full shadow-md">30日無料</span>
+                        <span class="bg-white px-4 py-2 rounded-full shadow-md">設置費0円</span>
+                        <span class="bg-white px-4 py-2 rounded-full shadow-md">終了前に必ずご連絡</span>
+                    </div>
+
+                    <!-- CTA Button (FV) -->
+                    <div class="pt-4 animate-fade-in-up" style="animation-delay: 0.4s;">
+                        <a href="https://liff.line.me/1656783300-KLG90La1/landing?follow=%40248vmjzs&lp=ksthV0&liff_id=1656783300-KLG90La1" target="_blank" class="group relative inline-flex items-center justify-center bg-brand-accent hover:bg-yellow-400 text-white text-xl font-bold py-4 px-10 rounded-full shadow-[0_6px_0_#B45309] active:shadow-none active:translate-y-1.5 transition-all w-full md:w-auto">
+                            <span class="absolute -top-3 -right-3 bg-red-500 text-white text-xs px-2 py-1 rounded-full animate-bounce">琉宮祭限定</span>
+                            <span>無料で試してみる</span>
+                            <i data-lucide="arrow-right" class="ml-2 w-6 h-6 group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right: Visuals (Model & Server) -->
+                <div class="w-full md:w-2/5 relative mt-8 md:mt-0 animate-fade-in-up" style="animation-delay: 0.6s;">
+                    <!-- Model Image -->
+                    <div class="relative z-20 flex justify-center md:justify-end">
+                        <!-- ★ 画像URLを直接指定 -->
+                        <img src="https://d27rnpuamwvieu.cloudfront.net/0KojVXtPX1AcetyskRPuWzgXX/normal" alt="案内スタッフ" class="w-auto h-[400px] md:h-[550px] object-contain drop-shadow-2xl">
+                        <!-- Balloon -->
+                        <div class="absolute top-10 right-0 md:-right-4 bg-white/90 text-brand-blue p-4 rounded-full w-28 h-28 flex items-center justify-center text-center font-bold shadow-lg animate-bounce-slow transform rotate-12 border-4 border-blue-200">
+                            ラクトク<br>だから<br>なっとく
+                        </div>
+                    </div>
+                    <!-- Server Image (Absolute positioning for overlap effect) -->
+                    <div class="absolute bottom-0 left-0 md:-left-10 z-10 w-32 md:w-48 transform -rotate-3">
+                        <!-- ★ 画像URLを直接指定 -->
+                        <img src="https://d27rnpuamwvieu.cloudfront.net/0X3bkS2LfWZ8U71OIZoZWJQXX/normal" alt="サーバー本体" class="w-full h-auto drop-shadow-xl rounded-xl border-2 border-white/50">
+                    </div>
+                </div>
             </div>
-
-          </div>
-
-          {/* Right Side: Model Image (v1時点: サイズ通常) */}
-          <div className="w-full md:w-2/5 relative flex justify-center md:justify-end mt-8 md:mt-0 h-[400px] md:h-[600px]">
-             
-             {/* Back Glow (To blend white background image) */}
-             <div className="absolute bottom-0 right-0 w-full h-[80%] bg-gradient-to-t from-white/80 via-white/40 to-transparent rounded-t-full filter blur-2xl z-0 md:w-[120%] md:-right-10 opacity-70"></div>
-
-             {/* Text Bubble - Moved to Left Side */}
-             <div className="absolute top-0 left-4 md:top-32 md:-left-16 z-30 animate-bounce-slow">
-                 <div className="text-white font-bold text-lg md:text-xl drop-shadow-md transform -rotate-12 leading-tight bg-[#00A0E9]/90 backdrop-blur-sm p-4 rounded-full border-2 border-white/50 shadow-lg text-center">
-                   ラクトク<br/>だから<br/>なっとく
-                 </div>
-             </div>
-
-             {/* Model Image Component */}
-             <div className="relative w-full h-full flex items-end justify-center md:justify-end z-10">
-                <SmartImage 
-                  src={images.model} 
-                  fallbackSrc="https://placehold.co/400x600/e0f2fe/00a0e9?text=Model+Image"
-                  alt="案内スタッフ"
-                  className="max-h-[50vh] md:max-h-[85vh] object-contain object-bottom drop-shadow-2xl"
-                />
-             </div>
-          </div>
-
         </div>
         
-        {/* Wave Divider */}
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-10">
-          <svg className="relative block w-[calc(100%+1.3px)] h-[40px] md:h-[60px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#F8FAFC"></path>
-          </svg>
+        <!-- Wave Bottom -->
+        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-20">
+            <svg class="relative block w-full h-[40px] md:h-[60px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#F8FAFC"></path>
+            </svg>
         </div>
-      </header>
+    </header>
 
-      {/* Section 1: Introduction */}
-      <section id="concept" className="py-20 bg-slate-50">
-        <div className="container mx-auto px-4 max-w-4xl text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#008CC9] mb-8">
-            沖縄の水は、県外と同じではありません。
-          </h2>
-          <div className="bg-white p-8 md:p-12 rounded-3xl shadow-xl border-t-4 border-[#00A0E9]">
-            <p className="text-lg leading-loose text-slate-700 mb-6">
-              沖縄の水は、地質・浄水工程・配管環境などの影響により、県外とは水質の特徴が異なります。
-              また、近年では<span className="font-bold text-red-500 bg-red-50 px-2 py-1 rounded">PFAS（有機フッ素化合物）</span>の問題も注目されています。
-            </p>
-            <p className="font-bold text-xl text-[#008CC9]">
-              だからこそ、「全国共通」ではなく、<br className="md:hidden"/>
-              「沖縄専用」のフィルターが必要です。
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 2: 5 Filters Details */}
-      <section id="filters" className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <span className="bg-[#00A0E9] text-white px-4 py-1 rounded-full text-sm font-bold tracking-widest shadow-md">
-              沖縄仕様
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mt-4">
-              段階的に整える、5つの役割。
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4 max-w-6xl mx-auto">
-            <FilterCard 
-              num="01" 
-              title="除去" 
-              sub="セディメント"
-              desc="砂・サビ・微細な不純物を除去し、後段フィルターを守る。" 
-              color="border-l-4 border-slate-300"
-            />
-            <FilterCard 
-              num="02" 
-              title="吸着" 
-              sub="プレカーボン"
-              desc="活性炭の力で塩素やニオイを吸着し、飲みやすさを整える。" 
-              color="border-l-4 border-slate-400"
-            />
-            <FilterCard 
-              num="03" 
-              title="対策" 
-              sub="ブロックカーボン"
-              desc="PFASなど微細な化学物質へ、二重の活性炭で徹底配慮。" 
-              color="border-l-4 border-[#00A0E9] ring-2 ring-[#00A0E9]/20 shadow-lg bg-blue-50/50"
-              badge="重要"
-            />
-            <FilterCard 
-              num="04" 
-              title="濾過" 
-              sub="UFフィルター"
-              desc="細菌・ウイルスレベルを除去しつつ、ミネラルは通す。" 
-              color="border-l-4 border-cyan-400"
-            />
-            <FilterCard 
-              num="05" 
-              title="軟水" 
-              sub="ポストカーボン"
-              desc="硬度を抑え、赤ちゃんや料理にも最適なまろやかさに。" 
-              color="border-l-4 border-pink-300"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Section 3: Child Photo & Eco/Safety */}
-      <section className="py-24 bg-[#E0F7FA] relative overflow-hidden">
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="flex flex-col md:flex-row items-center gap-12">
-            
-            <div className="w-full md:w-1/2">
-               <div className="relative">
-                 {/* Photo Frame Effect */}
-                 <div className="absolute top-4 left-4 w-full h-full border-4 border-[#00A0E9]/20 rounded-3xl transform rotate-3"></div>
-                 <div className="relative rounded-3xl overflow-hidden shadow-2xl transform -rotate-2 border-4 border-white bg-slate-200 aspect-[4/3]">
-                    <SmartImage 
-                      src={images.child} 
-                      fallbackSrc="https://placehold.co/600x450/e0f7fa/00a0e9?text=Child+Image"
-                      alt="水を飲む子供"
-                      className="w-full h-full object-cover"
-                    />
-                 </div>
-                 {/* Badge */}
-                 <div className="absolute -bottom-6 -right-6 bg-white p-4 rounded-full shadow-lg text-[#00A0E9] font-bold text-center w-32 h-32 flex items-center justify-center flex-col border-4 border-[#E0F7FA]">
-                    <span className="text-2xl">笑顔</span>
-                    <span className="text-xs">のおいしさ</span>
-                 </div>
-               </div>
-            </div>
-
-            <div className="w-full md:w-1/2 text-left md:pl-10">
-              <h2 className="text-3xl font-bold text-[#008CC9] mb-8 flex items-center gap-2">
-                <Leaf className="fill-current" />
-                おいしいから、飲みたくなる。
-              </h2>
-              <p className="text-lg text-slate-700 leading-loose mb-8">
-                「お水ちょうだい！」<br/>
-                そんな声が増えるのが、楽得ウォーターの自慢です。<br/>
-                <br/>
-                不純物はしっかり取り除きながら、<br/>
-                ミネラルは残したまろやかな軟水。<br/>
-                お子様の毎日の水分補給も、安心してお任せください。
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <div className="bg-white px-5 py-2 rounded-full text-slate-600 font-bold shadow-sm flex items-center gap-2 text-sm">
-                  <CheckCircle2 size={16} className="text-[#00A0E9]" /> 赤ちゃんのミルクに
-                </div>
-                <div className="bg-white px-5 py-2 rounded-full text-slate-600 font-bold shadow-sm flex items-center gap-2 text-sm">
-                  <CheckCircle2 size={16} className="text-[#00A0E9]" /> 毎日のお料理に
-                </div>
-                <div className="bg-white px-5 py-2 rounded-full text-slate-600 font-bold shadow-sm flex items-center gap-2 text-sm">
-                  <CheckCircle2 size={16} className="text-[#00A0E9]" /> ペットボトル削減
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* Section 4: Trust / Promise */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <div className="bg-slate-50 border-2 border-[#00A0E9]/30 rounded-3xl p-8 md:p-12 text-center shadow-lg">
-            <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-6">
-              「忘れて課金」はさせません。
-            </h2>
-            <p className="text-slate-600 mb-8">
-              無料体験終了の<span className="font-bold text-[#00A0E9]">7日前</span>に必ずご連絡します。<br/>
-              合わなければ、そのまま終了。費用は一切かかりません。
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-               <PromiseItem icon={<PhoneCall />} text="終了前に連絡" />
-               <PromiseItem icon={<CheckCircle2 />} text="継続の意思確認" />
-               <PromiseItem icon={<ShieldCheck />} text="勝手な課金なし" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section: Collaboration Banner Style */}
-      <section id="cta-section" className="bg-[#1a1a1a] text-white py-16 relative overflow-hidden">
-        {/* Background Effects */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-[#1a1a1a] to-[#262626]"></div>
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#00A0E9]/20 to-transparent"></div>
-        <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-[#F59E0B]/10 rounded-full blur-3xl"></div>
-
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-12">
-            
-            {/* Left: Collaboration Info */}
-            <div className="flex-1 text-center md:text-left space-y-6">
-              <div className="flex items-center justify-center md:justify-start gap-6 mb-4">
-                 <div className="w-20 h-20 bg-black border border-slate-700 flex items-center justify-center font-serif font-bold text-2xl shadow-[0_0_15px_rgba(255,255,255,0.2)]">
-                    <span className="text-white">琉宮祭</span>
-                 </div>
-                 <X className="text-slate-500 w-6 h-6" />
-                 <div className="flex flex-col items-center">
-                    <div className="flex items-center gap-1 font-bold text-[#00A0E9] text-xl">
-                      <Waves size={24} /> RAKUTOKU
+    <!-- Section 1: Sympathy (Problem) -->
+    <section class="py-20 bg-slate-50">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <div class="bg-white rounded-3xl p-8 md:p-12 shadow-xl border-t-8 border-brand-blue text-center">
+                <h2 class="text-2xl md:text-3xl font-bold text-brand-blue mb-8">
+                    沖縄の水は、<br class="md:hidden"/>県外と同じではありません。
+                </h2>
+                <div class="space-y-6 text-lg leading-relaxed text-slate-600">
+                    <p>
+                        沖縄の水は、地質・浄水工程・配管環境などの影響により、県外とは水質の特徴が異なります。
+                    </p>
+                    <div class="bg-blue-50 p-6 rounded-xl text-left border-l-4 border-brand-blue">
+                        <p class="font-bold text-brand-dark mb-2 flex items-center gap-2">
+                            <i data-lucide="alert-circle" class="w-5 h-5"></i> 近年では
+                        </p>
+                        <p>
+                            <span class="text-red-500 font-bold bg-red-100 px-1 rounded">有機フッ素化合物（PFAS）</span>など、水の安全性について考えるきっかけも増えました。
+                        </p>
                     </div>
-                    <div className="text-xs tracking-widest text-slate-400">OKINAWA</div>
-                 </div>
-              </div>
-              
-              <h2 className="text-2xl md:text-4xl font-bold leading-snug">
-                <span className="text-[#F59E0B] drop-shadow-sm">琉宮祭コラボキャンペーン</span><br/>
-                LINEから特典をGET
-              </h2>
-              
-              <p className="text-slate-300 text-sm md:text-base leading-relaxed">
-                琉宮祭の「祈り」「表現」「平和」の想いに共感し、<br className="hidden md:block"/>
-                私たちもこの場に立っています。
-              </p>
+                    <p class="font-bold text-xl md:text-2xl text-slate-800">
+                        だから私たちは、「全国共通の水」ではなく、<br/>
+                        <span class="text-brand-blue underline decoration-brand-accent decoration-4 underline-offset-4">沖縄の水を前提にした設計</span>を選びました。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Solution (5 Filters) -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <span class="bg-brand-blue text-white px-4 py-1 rounded-full text-sm font-bold tracking-widest shadow-md">
+                    TECHNOLOGY
+                </span>
+                <h2 class="text-3xl md:text-4xl font-black text-slate-800 mt-4 leading-snug">
+                    沖縄の水に合わせて、<br/>五段階にしました。
+                </h2>
+                <p class="mt-6 text-slate-600 max-w-2xl mx-auto bg-slate-50 py-4 px-6 rounded-2xl">
+                    一つのフィルターですべてを解決するのではなく、役割を分けて、段階的に整える。<br/>
+                    それが、ラクトクウォーターの考え方です。
+                </p>
             </div>
 
-            {/* Right: Action Area */}
-            <div className="w-full md:w-auto flex-shrink-0 flex flex-col items-center gap-4">
-              
-              <a 
-                href={SIGNUP_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full md:w-auto bg-[#F59E0B] hover:bg-[#D97706] text-white font-bold py-4 px-8 rounded-lg shadow-lg flex items-center justify-center gap-2 transition-transform transform hover:scale-105"
-              >
-                <span>今すぐ無料で申し込む</span>
-                <ArrowRight size={20} />
-              </a>
+            <!-- Filters Grid -->
+            <div class="max-w-5xl mx-auto space-y-4">
+                <!-- Filter 1 -->
+                <div class="flex flex-col md:flex-row bg-white border-2 border-slate-100 rounded-2xl p-6 hover:shadow-lg transition-shadow relative overflow-hidden">
+                    <div class="absolute top-0 left-0 bg-slate-200 text-slate-600 font-bold px-4 py-1 rounded-br-xl text-sm">01</div>
+                    <div class="md:w-1/4 flex flex-col items-center justify-center mb-4 md:mb-0 border-b md:border-b-0 md:border-r border-slate-100 pb-4 md:pb-0 md:pr-6">
+                        <span class="text-sm font-bold text-slate-400 mb-1">SEDIMENT</span>
+                        <h3 class="font-bold text-lg text-slate-800 text-center">セディメントフィルター</h3>
+                    </div>
+                    <div class="md:w-3/4 md:pl-6 flex flex-col justify-center">
+                        <p class="font-bold text-brand-dark mb-2">水中の砂・サビ・微細な不純物を除去</p>
+                        <p class="text-sm text-slate-500 bg-slate-50 p-2 rounded">→ 後段フィルターを守る土台</p>
+                    </div>
+                </div>
+
+                <!-- Filter 2 -->
+                <div class="flex flex-col md:flex-row bg-white border-2 border-slate-100 rounded-2xl p-6 hover:shadow-lg transition-shadow relative overflow-hidden">
+                    <div class="absolute top-0 left-0 bg-slate-300 text-slate-600 font-bold px-4 py-1 rounded-br-xl text-sm">02</div>
+                    <div class="md:w-1/4 flex flex-col items-center justify-center mb-4 md:mb-0 border-b md:border-b-0 md:border-r border-slate-100 pb-4 md:pb-0 md:pr-6">
+                        <span class="text-sm font-bold text-slate-400 mb-1">PRE CARBON</span>
+                        <h3 class="font-bold text-lg text-slate-800 text-center">プレカーボンフィルター<br/><span class="text-xs">活性炭（1本目）</span></h3>
+                    </div>
+                    <div class="md:w-3/4 md:pl-6 flex flex-col justify-center">
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            水道水に含まれる残留塩素、有機物、カビ臭などの物質を高純度ヤシ殼活性炭で効率的に除去し、水の味を向上させます。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Filter 3 -->
+                <div class="flex flex-col md:flex-row bg-brand-light border-2 border-brand-blue rounded-2xl p-6 shadow-md relative overflow-hidden transform md:-translate-x-4">
+                    <div class="absolute top-0 left-0 bg-brand-accent text-white font-bold px-4 py-1 rounded-br-xl text-sm">03</div>
+                    <div class="absolute top-4 right-4 text-brand-blue opacity-20"><i data-lucide="shield-check" class="w-16 h-16"></i></div>
+                    <div class="md:w-1/4 flex flex-col items-center justify-center mb-4 md:mb-0 border-b md:border-b-0 md:border-r border-blue-200 pb-4 md:pb-0 md:pr-6">
+                        <span class="text-sm font-bold text-brand-blue mb-1">UF MEMBRANE</span>
+                        <h3 class="font-bold text-lg text-brand-dark text-center">UFメンブレンフィルター</h3>
+                    </div>
+                    <div class="md:w-3/4 md:pl-6 flex flex-col justify-center">
+                        <p class="font-bold text-slate-800 mb-2">細菌・ウイルスレベルの微粒子を除去。<br/>ミネラルは通す構造。</p>
+                        <p class="text-sm text-brand-dark font-bold flex items-center gap-2">
+                            <i data-lucide="thumbs-up" class="w-4 h-4"></i> 味と安全性のバランスを重視しています。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Filter 4 -->
+                <div class="flex flex-col md:flex-row bg-white border-2 border-brand-blue rounded-2xl p-6 hover:shadow-lg transition-shadow relative overflow-hidden">
+                    <div class="absolute top-0 left-0 bg-brand-blue text-white font-bold px-4 py-1 rounded-br-xl text-sm">04</div>
+                    <div class="md:w-1/4 flex flex-col items-center justify-center mb-4 md:mb-0 border-b md:border-b-0 md:border-r border-slate-100 pb-4 md:pb-0 md:pr-6">
+                        <span class="text-sm font-bold text-slate-400 mb-1">POST CARBON</span>
+                        <h3 class="font-bold text-lg text-slate-800 text-center">ポストカーボンフィルター<br/><span class="text-xs">活性炭（2本目）</span></h3>
+                    </div>
+                    <div class="md:w-3/4 md:pl-6 flex flex-col justify-center">
+                        <p class="font-bold text-slate-800 mb-2">有機フッ素化合物など、塩素やニオイを吸着し、飲みやすさを整えます。</p>
+                        <p class="text-sm text-brand-blue font-bold flex items-center gap-2">
+                            <i data-lucide="check-circle-2" class="w-4 h-4"></i> 沖縄の水質を前提に、活性炭を2本使用
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Filter 5 -->
+                <div class="flex flex-col md:flex-row bg-pink-50 border-2 border-pink-200 rounded-2xl p-6 hover:shadow-lg transition-shadow relative overflow-hidden">
+                    <div class="absolute top-0 left-0 bg-pink-400 text-white font-bold px-4 py-1 rounded-br-xl text-sm">05</div>
+                    <div class="md:w-1/4 flex flex-col items-center justify-center mb-4 md:mb-0 border-b md:border-b-0 md:border-r border-pink-100 pb-4 md:pb-0 md:pr-6">
+                        <span class="text-sm font-bold text-pink-400 mb-1">EXCHANGE</span>
+                        <h3 class="font-bold text-lg text-slate-800 text-center">エクスチェンジフィルター</h3>
+                    </div>
+                    <div class="md:w-3/4 md:pl-6 flex flex-col justify-center">
+                        <p class="font-bold text-slate-800 mb-2">硬度を抑え、赤ちゃん・料理・毎日の飲み水にやさしく。<br/>金属性の不純物を除去し軟水化します。</p>
+                        <p class="text-sm text-pink-600 font-bold flex items-center gap-2">
+                            <i data-lucide="sparkles" class="w-4 h-4"></i> 沖縄の硬度特性を考慮した最終調整。
+                        </p>
+                    </div>
+                </div>
             </div>
 
-          </div>
+            <!-- Filter Image (Visual) -->
+            <div class="max-w-4xl mx-auto mt-12">
+                 <!-- ★ 画像URLを直接指定 -->
+                 <img src="https://d27rnpuamwvieu.cloudfront.net/0eEiSNJu3uTVWwzfu8JmoHgXX/normal" alt="5段階フィルター構成" class="w-full h-auto rounded-xl shadow-md border-4 border-brand-light">
+            </div>
         </div>
-      </section>
+    </section>
 
-      {/* Footer */}
-      <footer className="bg-black text-slate-500 py-8 text-center text-xs">
-        <div className="container mx-auto px-4">
-          <p>&copy; {new Date().getFullYear()} RakuToku Water. Okinawa Optimized Filtration.</p>
+    <!-- Section 3: Eco & Child -->
+    <section class="py-24 bg-[#E0F7FA] relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-white/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <!-- Child Image -->
+                <div class="w-full md:w-1/2">
+                    <div class="relative transform -rotate-2 hover:rotate-0 transition-transform duration-500">
+                        <div class="absolute inset-0 border-4 border-brand-blue rounded-3xl transform translate-x-3 translate-y-3"></div>
+                        <!-- ★ 画像URLを直接指定 -->
+                        <img src="https://d27rnpuamwvieu.cloudfront.net/0x2X6lRrjjgT9vKSnE95n4gXX/normal" alt="水を飲む子供" class="relative rounded-3xl shadow-2xl w-full h-auto object-cover border-4 border-white">
+                        <div class="absolute -bottom-6 -right-6 bg-white p-4 rounded-full shadow-lg w-28 h-28 flex flex-col items-center justify-center text-center font-bold text-brand-blue border-4 border-brand-light animate-bounce-slow">
+                            <span class="text-2xl">笑顔</span>
+                            <span class="text-xs">のおいしさ</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text -->
+                <div class="w-full md:w-1/2">
+                    <h2 class="text-3xl font-bold text-brand-dark mb-6 flex items-center gap-3">
+                        <i data-lucide="leaf" class="text-green-500 fill-current"></i>
+                        水は、自然から<br class="md:hidden"/>借りているもの。
+                    </h2>
+                    <div class="space-y-6 text-slate-700 text-lg leading-relaxed">
+                        <p>
+                            毎日のペットボトル消費は、気づかないうちにゴミと輸送エネルギーを増やしています。
+                        </p>
+                        <p>
+                            ウォーターサーバーは、「便利」だけのものではありません。
+                        </p>
+                        <ul class="bg-white/60 p-6 rounded-2xl space-y-4 shadow-sm">
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="text-green-500 font-bold"></i> プラスチックごみの削減
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="text-green-500 font-bold"></i> 家庭で水を大切に使う意識
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="text-green-500 font-bold"></i> 子どもたちの未来への配慮
+                            </li>
+                        </ul>
+                        <p class="font-bold text-brand-dark">
+                            ラクトクウォーターは、水の使い方そのものも提案したいと考えています。
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </footer>
+    </section>
 
-      {/* Floating CTA (Mobile Only) */}
-      <div className={`fixed bottom-0 left-0 w-full p-4 md:hidden z-50 transition-transform duration-300 ${isScrolled ? 'translate-y-0' : 'translate-y-full'}`}>
-        <button 
-          onClick={scrollToCta}
-          className="w-full bg-gradient-to-r from-[#F59E0B] to-[#D97706] text-white font-bold py-4 rounded-xl shadow-2xl flex items-center justify-center gap-2 border-2 border-white/20"
-        >
-          特典を受け取る <ChevronRight size={20} />
-        </button>
-      </div>
+    <!-- Section 4 & 5: Trust & Trial -->
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-4 max-w-4xl text-center">
+            <div class="mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-6">
+                    水は、使ってみないと分かりません。
+                </h2>
+                <p class="text-lg text-slate-600 mb-8 leading-relaxed">
+                    数字や説明だけで、水の良し悪しは決められません。<br/>
+                    だからラクトクウォーターは、<span class="text-brand-blue font-bold text-2xl border-b-4 border-yellow-200">30日間の無料体験</span>を用意しました。
+                </p>
+                <p class="font-bold text-slate-800">
+                    生活の中で、じっくり判断してほしいからです。
+                </p>
+            </div>
+
+            <!-- No Automatic Billing Box -->
+            <div class="bg-slate-50 border-4 border-brand-blue rounded-3xl overflow-hidden shadow-xl">
+                <div class="bg-brand-blue p-4 text-white font-bold text-lg tracking-widest">
+                    安心のお約束
+                </div>
+                <div class="p-8 md:p-12">
+                    <h3 class="text-2xl md:text-3xl font-bold text-slate-800 mb-6">
+                        でも「忘れて課金」はしません
+                    </h3>
+                    <p class="text-slate-600 mb-10 text-left md:text-center leading-relaxed">
+                        携帯会社やカード会社の「無料体験」で、いつの間にか課金が始まっていた…。そんな経験がある方も多いと思います。<br class="hidden md:block"/>
+                        ラクトクウォーターでは、忘れさせて料金が始まる仕組みは取りません。
+                    </p>
+
+                    <div class="grid md:grid-cols-3 gap-6 mb-10">
+                        <div class="bg-white p-6 rounded-xl shadow-sm flex flex-col items-center">
+                            <div class="w-16 h-16 bg-blue-100 text-brand-blue rounded-full flex items-center justify-center mb-4">
+                                <i data-lucide="phone-call" class="w-8 h-8"></i>
+                            </div>
+                            <h4 class="font-bold mb-2">終了7日前にご連絡</h4>
+                            <p class="text-xs text-slate-500">無料期間が終わる前に必ずお知らせします</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm flex flex-col items-center">
+                            <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-4">
+                                <i data-lucide="users" class="w-8 h-8"></i>
+                            </div>
+                            <h4 class="font-bold mb-2">一緒に確認</h4>
+                            <p class="text-xs text-slate-500">続けるかどうかを一緒に確認します</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm flex flex-col items-center">
+                            <div class="w-16 h-16 bg-slate-100 text-slate-500 rounded-full flex items-center justify-center mb-4">
+                                <i data-lucide="x-circle" class="w-8 h-8"></i>
+                            </div>
+                            <h4 class="font-bold mb-2">合わなければ終了</h4>
+                            <p class="text-xs text-slate-500">そのまま終了。費用は一切かかりません</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-brand-light/50 p-4 rounded-lg inline-block">
+                        <p class="text-brand-dark font-bold flex items-center gap-2 text-lg">
+                            <i data-lucide="shield-check" class="fill-current text-brand-blue"></i>
+                            勝手に課金されることはありません。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 6: Campaign Content -->
+    <section class="py-20 bg-gradient-to-br from-brand-light to-white border-t border-brand-light">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <span class="bg-brand-dark text-white px-6 py-2 rounded-full text-lg font-bold shadow-md inline-block mb-8">
+                    琉宮祭 限定
+                </span>
+                <h2 class="text-3xl font-bold text-slate-800 mb-10">無料体験内容</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
+                    <div class="bg-white p-5 rounded-xl shadow-sm flex items-center gap-4 border border-slate-100">
+                        <i data-lucide="check-circle" class="text-brand-blue w-6 h-6 flex-shrink-0"></i>
+                        <span class="font-bold text-lg">五段階フィルターをフル体験</span>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl shadow-sm flex items-center gap-4 border border-slate-100">
+                        <i data-lucide="check-circle" class="text-brand-blue w-6 h-6 flex-shrink-0"></i>
+                        <span class="font-bold text-lg">設置費 0円</span>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl shadow-sm flex items-center gap-4 border border-slate-100">
+                        <i data-lucide="check-circle" class="text-brand-blue w-6 h-6 flex-shrink-0"></i>
+                        <span class="font-bold text-lg">解約費 0円</span>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl shadow-sm flex items-center gap-4 border-2 border-brand-accent bg-yellow-50/50">
+                        <i data-lucide="check-circle" class="text-brand-accent w-6 h-6 flex-shrink-0"></i>
+                        <span class="font-bold text-lg text-slate-900">判断前に必ずご連絡</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 7: Collaboration -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4 max-w-3xl text-center">
+            <!-- Collaboration Logo/Visual Area -->
+            <div class="flex justify-center items-center gap-6 mb-10 opacity-80">
+                <div class="w-20 h-20 bg-black text-white flex items-center justify-center font-serif font-bold text-xl rounded">
+                    <!-- Logo Placeholder (テキスト表示) -->
+                    琉宮祭
+                </div>
+                <i data-lucide="x" class="text-slate-300 w-6 h-6"></i>
+                <div class="text-brand-blue font-bold text-xl flex flex-col items-center">
+                    <span class="flex items-center gap-1"><i data-lucide="waves"></i> RAKUTOKU</span>
+                    <span class="text-xs tracking-widest">OKINAWA</span>
+                </div>
+            </div>
+
+            <h2 class="text-2xl md:text-3xl font-bold text-slate-800 mb-8 font-serif">
+                地域と、家族と、未来のために。
+            </h2>
+            <div class="space-y-6 text-slate-600 leading-loose">
+                <p>
+                    琉宮祭が大切にしている「つながり」「安心」「人」。
+                </p>
+                <p>
+                    その想いに共感し、今回のコラボが生まれました。
+                </p>
+                <p class="font-bold text-lg text-slate-800">
+                    売るためではなく、知ってもらうための無料体験です。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section (Final) -->
+    <section id="cta-section" class="bg-[#1a1a1a] text-white py-16 md:py-24 relative overflow-hidden">
+        <!-- Background Effects -->
+        <div class="absolute inset-0 bg-gradient-to-r from-black via-[#1a1a1a] to-[#262626]"></div>
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-brand-blue/20 to-transparent"></div>
+        <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-brand-accent/10 rounded-full blur-3xl"></div>
+
+        <div class="container mx-auto px-4 relative z-10 text-center">
+            <h2 class="text-3xl md:text-5xl font-bold mb-8 font-serif">
+                沖縄の水だからこそ、<br/>
+                沖縄に合った選択を。
+            </h2>
+            
+            <div class="bg-white/10 backdrop-blur-md p-8 md:p-12 rounded-3xl max-w-3xl mx-auto border border-white/20 shadow-2xl">
+                <div class="mb-8">
+                    <span class="text-brand-accent font-bold tracking-widest text-lg block mb-2">琉宮祭限定</span>
+                    <p class="text-3xl md:text-5xl font-black">
+                        30日間 無料体験 実施中
+                    </p>
+                </div>
+                
+                <a href="https://liff.line.me/1656783300-KLG90La1/landing?follow=%40248vmjzs&lp=ksthV0&liff_id=1656783300-KLG90La1" 
+                   target="_blank"
+                   class="group w-full md:w-auto inline-flex items-center justify-center bg-brand-accent hover:bg-yellow-500 text-white text-xl md:text-2xl font-bold py-5 px-12 rounded-full shadow-[0_6px_0_#B45309] active:shadow-none active:translate-y-1.5 transition-all transform hover:scale-105">
+                    <span>今すぐ無料で試す</span>
+                    <i data-lucide="arrow-right" class="ml-3 w-6 h-6 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-slate-500 py-8 text-center text-xs">
+        <div class="container mx-auto px-4">
+            <p>&copy; 2026 RakuToku Water. Okinawa Optimized Filtration.</p>
+        </div>
+    </footer>
+
+    <!-- Floating CTA (Mobile Only) -->
+    <div id="floating-cta" class="fixed bottom-0 left-0 w-full p-4 md:hidden z-50 transition-transform duration-300 translate-y-full">
+        <a href="https://liff.line.me/1656783300-KLG90La1/landing?follow=%40248vmjzs&lp=ksthV0&liff_id=1656783300-KLG90La1"
+           target="_blank"
+           class="w-full bg-gradient-to-r from-brand-accent to-yellow-500 text-white font-bold py-4 rounded-xl shadow-2xl flex items-center justify-center gap-2 border-2 border-white/20">
+            今すぐ無料で試す <i data-lucide="chevron-right" class="w-5 h-5"></i>
+        </a>
     </div>
-  );
-};
 
-// --- Sub Components ---
+    <!-- Scripts -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
 
-const SmartImage = ({ src, fallbackSrc, alt, className }) => {
-  const [imgSrc, setImgSrc] = useState(src);
+        // Navbar & Scroll Logic
+        const navbar = document.getElementById('navbar');
+        const floatingCta = document.getElementById('floating-cta');
 
-  return (
-    <img 
-      src={imgSrc} 
-      alt={alt} 
-      className={className}
-      onError={() => setImgSrc(fallbackSrc)}
-    />
-  );
-};
-
-const FlyerFeatureBox = ({ text }) => (
-  <div className="bg-[#E0F2FE] border-2 border-white text-[#008CC9] font-bold text-lg md:text-xl py-3 px-6 rounded-xl shadow-lg flex items-center gap-3 transform hover:scale-105 transition-transform text-left">
-    <div className="w-2 h-2 bg-[#00A0E9] rounded-full flex-shrink-0"></div>
-    {text}
-  </div>
-);
-
-const FilterCard = ({ num, title, sub, desc, color, badge }) => (
-  <div className={`bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow relative ${color}`}>
-    {badge && (
-      <span className="absolute top-2 right-2 bg-red-500 text-white text-[10px] px-2 py-0.5 rounded-full font-bold">
-        {badge}
-      </span>
-    )}
-    <div className="flex items-end gap-2 mb-2">
-      <span className="text-3xl font-bold text-slate-200">{num}</span>
-      <span className="text-sm font-bold text-[#00A0E9] uppercase mb-1">{sub}</span>
-    </div>
-    <h3 className="text-lg font-bold text-slate-800 mb-2">{title}</h3>
-    <p className="text-xs text-slate-600 leading-relaxed">{desc}</p>
-  </div>
-);
-
-const PromiseItem = ({ icon, text }) => (
-  <div className="bg-white p-4 rounded-xl flex items-center justify-center gap-3 shadow-sm border border-slate-100">
-    <div className="text-[#00A0E9]">{icon}</div>
-    <span className="font-bold text-slate-700">{text}</span>
-  </div>
-);
-
-export default App;
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                // Scrolled
+                floatingCta.classList.remove('translate-y-full');
+            } else {
+                // Top
+                floatingCta.classList.add('translate-y-full');
+            }
+        });
+    </script>
+</body>
+</html>

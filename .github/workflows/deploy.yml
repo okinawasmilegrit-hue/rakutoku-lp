@@ -12,13 +12,12 @@ jobs:
     steps:
       - name: 🚚 Get latest code
         uses: actions/checkout@v4
-
+      
       - name: 🚀 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          # サーバー側はルート（./）指定で正しい場所に飛びます
-          server-dir: ./
-          local-dir: ./
+          # ↓ここが重要！ ryugusai フォルダの中に送る設定です
+          server-dir: ./ryugusai/

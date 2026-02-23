@@ -110,16 +110,24 @@
 
     <!-- Hero Section -->
     <header class="relative min-h-[100dvh] flex items-center pt-24 pb-0 overflow-hidden bg-gradient-to-br from-[#40C4FF] via-[#00A0E9] to-[#01579B]">
-        <div class="absolute inset-0 z-0 overflow-hidden">
+        <!-- 背景装飾（水玉・泡の追加） -->
+        <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
             <div class="absolute -top-24 -left-24 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
             <div class="absolute top-1/2 -right-24 w-80 h-80 bg-cyan-300/20 rounded-full blur-3xl"></div>
+            
+            <!-- 水玉（泡）のエフェクト -->
+            <div class="absolute top-[15%] left-[5%] w-6 h-6 bg-white/30 rounded-full animate-float" style="animation-duration: 3s;"></div>
+            <div class="absolute top-[30%] right-[10%] w-10 h-10 bg-white/20 rounded-full animate-float" style="animation-duration: 5s; animation-delay: 1s;"></div>
+            <div class="absolute bottom-[20%] left-[15%] w-12 h-12 bg-white/25 rounded-full animate-float" style="animation-duration: 4s; animation-delay: 2s;"></div>
+            <div class="absolute top-[60%] right-[25%] w-4 h-4 bg-white/40 rounded-full animate-float" style="animation-duration: 2.5s; animation-delay: 0.5s;"></div>
+            <div class="absolute bottom-[40%] left-[40%] w-8 h-8 bg-white/15 rounded-full animate-float" style="animation-duration: 4.5s; animation-delay: 1.5s;"></div>
         </div>
         
-        <div class="container mx-auto px-4 md:px-8 relative z-10 h-full flex flex-col justify-center">
-            <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-8 h-full">
+        <div class="container mx-auto px-4 md:px-8 relative z-10 py-10 lg:py-0 h-full flex flex-col justify-center">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8 h-full">
                 
                 <!-- Hero Content (Left) -->
-                <div class="w-full lg:w-1/2 text-center lg:text-left space-y-8 z-20 pb-10 lg:pb-0">
+                <div class="w-full lg:w-[55%] text-center lg:text-left space-y-8 z-20">
                     <div class="animate-fade-in-up">
                         <div class="inline-block bg-white/20 backdrop-blur-md border border-white/30 text-white text-xs md:text-sm font-bold py-1.5 px-4 rounded-full mb-6 shadow-sm">
                             沖縄の「硬水・PFAS」問題を徹底解決
@@ -149,42 +157,42 @@
                         </div>
                     </div>
 
-                    <!-- Products Display -->
-                    <div class="flex flex-col sm:flex-row items-end justify-center lg:justify-start gap-6 md:gap-8 mt-12 pl-2">
+                    <!-- Products Display (重ならないように横並び・縦並びを制御) -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-8 mt-12">
                         <!-- Water Server Image -->
-                        <div class="relative w-full max-w-[200px] md:max-w-[240px] flex justify-center mb-4 sm:mb-0 shrink-0">
+                        <div class="relative w-[50%] sm:w-[40%] max-w-[200px] flex justify-center shrink-0">
                             <img src="https://rakutokuwater.smilegrit.com/wp-content/uploads/2026/02/琉宮祭LP素材.png"
                                  alt="Water Server"
-                                 class="h-60 md:h-96 w-auto object-contain drop-shadow-2xl animate-float"
+                                 class="w-full h-auto object-contain drop-shadow-2xl animate-float"
                                  onerror="this.src='https://placehold.co/200x400/f8fafc/00a0e9?text=Server'">
+                        </div>
+
+                        <!-- Filter System Image -->
+                        <div class="relative w-[90%] sm:w-[60%] max-w-[350px] group flex justify-center">
+                            <img src="https://rakutokuwater.smilegrit.com/wp-content/uploads/2026/02/①-②-③-④-⑤-1.png"
+                                 alt="5-Stage Filter System"
+                                 class="w-full h-auto object-contain drop-shadow-xl rounded-lg"
+                                 onerror="this.src='https://placehold.co/400x150/ffffff/00a0e9?text=Filter+System'">
                         </div>
                     </div>
                 </div>
 
-                <!-- Right Side: Model & Filter Image -->
-                <div class="w-full lg:w-1/2 relative flex justify-end items-end h-[500px] md:h-[700px] lg:h-[850px] mt-8 lg:mt-0 pointer-events-none">
+                <!-- Right Side: Model & Badge (重なり解消のためレイアウト修正) -->
+                <div class="w-full lg:w-[45%] relative flex justify-center lg:justify-end items-end mt-12 lg:mt-0 pointer-events-none px-4">
                     
                     <!-- Badge -->
-                    <div class="absolute top-0 left-0 md:top-[10%] md:left-[10%] lg:top-[20%] lg:left-[5%] z-30 animate-float pointer-events-auto" style="animation-delay: 1s;">
-                        <div class="bg-[#00A0E9]/90 backdrop-blur-sm text-white rounded-full shadow-xl border-[3px] border-white transform -rotate-12 flex flex-col items-center justify-center w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 text-center leading-tight hover:scale-105 transition-transform cursor-pointer">
-                            <span class="font-bold text-[10px] md:text-xs lg:text-sm">ラクトク</span>
-                            <span class="font-bold text-[10px] md:text-xs lg:text-sm">だから</span>
-                            <span class="font-black text-xs md:text-lg lg:text-xl">なっとく</span>
+                <!-- Right Side: Model & Badge -->
+                <div class="w-full lg:w-[45%] relative flex justify-center lg:justify-end items-end mt-12 lg:mt-0 pointer-events-none px-4">
+                    <div class="absolute top-[40%] left-[-5%] md:top-[50%] md:left-[0%] lg:top-[45%] lg:-left-16 z-30 animate-float pointer-events-auto" style="animation-delay: 1s;">
+                        <div class="bg-[#00A0E9] text-white rounded-full shadow-2xl border-[4px] border-white transform -rotate-12 flex flex-col items-center justify-center w-28 h-28 md:w-36 md:h-36 text-center leading-tight hover:scale-105 transition-transform cursor-pointer">
+                            <span class="font-bold text-xs md:text-sm lg:text-base">ラクトク</span>
+                            <span class="font-bold text-xs md:text-sm lg:text-base">だから</span>
+                            <span class="font-black text-base md:text-xl lg:text-2xl">なっとく</span>
                         </div>
                     </div>
-
-                    <!-- 5 Filters Image -->
-                    <div class="absolute top-[25%] left-0 md:top-[30%] md:left-0 lg:top-[30%] lg:left-[-10%] z-20 w-[45%] md:w-[45%] lg:w-[50%] animate-float pointer-events-auto" style="animation-duration: 5s;">
-                         <img src="https://rakutokuwater.smilegrit.com/wp-content/uploads/2026/02/琉宮祭LP素材-2.png"
-                              alt="5-Stage Filter Detail"
-                              class="w-full h-auto object-contain drop-shadow-2xl hover:scale-105 transition-transform"
-                              onerror="this.src='https://placehold.co/400x400/ffffff/00a0e9?text=5+Filters'">
-                    </div>
-
-                    <!-- Model Image (女性モデルの画像URLに修正) -->
-                    <img src="https://rakutokuwater.smilegrit.com/wp-content/uploads/2026/02/①-②-③-④-⑤-1.png"
+                    <img src="https://rakutokuwater.smilegrit.com/wp-content/uploads/2026/02/琉宮祭LP素材-1.png"
                          alt="Smiling Staff"
-                         class="max-w-none h-full w-auto object-contain object-bottom relative z-10 drop-shadow-[-10px_0_20px_rgba(0,0,0,0.15)] transform translate-x-4 md:-translate-x-4 lg:-translate-x-8 scale-[1.3] md:scale-[1.4] lg:scale-[1.5] origin-bottom pointer-events-auto"
+                         class="w-[100%] md:w-[85%] lg:w-[135%] max-w-none h-auto object-contain object-bottom relative z-10 drop-shadow-[-15px_0_30px_rgba(0,0,0,0.2)] origin-bottom pointer-events-auto transform lg:translate-x-12"
                          onerror="this.src='https://placehold.co/400x600/e0f2fe/00a0e9?text=Model+Image'">
                 </div>
             </div>
@@ -354,16 +362,16 @@
         </div>
     </section>
 
-    <!-- Section 4: 売り込まない理由 -->
+    <!-- Section 4: 売り込まない理由 (修正箇所：フィルター画像に変更) -->
     <section class="py-16 md:py-24 bg-white relative overflow-hidden">
         <div class="container mx-auto px-4 max-w-5xl">
             <div class="flex flex-col md:flex-row items-center gap-10 md:gap-12">
                 <!-- 左側：画像 -->
                 <div class="w-full md:w-1/2 flex justify-center">
-                    <img src="https://rakutokuwater.smilegrit.com/wp-content/uploads/2026/02/%E7%90%89%E5%AE%AE%E7%A5%ADLP%E7%B4%A0%E6%9D%90-1.png" 
-                         alt="無料体験" 
+                    <img src="https://rakutokuwater.smilegrit.com/wp-content/uploads/2026/02/琉宮祭LP素材-2.png" 
+                         alt="5本のフィルター" 
                          class="max-w-full h-auto object-contain drop-shadow-xl"
-                         onerror="this.src='https://placehold.co/400x500/e0f2fe/00a0e9?text=Image'">
+                         onerror="this.src='https://placehold.co/400x500/e0f2fe/00a0e9?text=Filter'">
                 </div>
                 <!-- 右側：テキスト -->
                 <div class="w-full md:w-1/2 text-center md:text-left space-y-8">

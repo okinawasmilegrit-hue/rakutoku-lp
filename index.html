@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RakuToku Water | 沖縄の水を追求した5段階フィルター</title>
-    <meta name="description" content="県外とは水質が違う、沖縄の水。その違いを前提に設計した5段階フィルターの楽得ウォーター。硬度調整とPFAS対策を徹底。">
+    <meta name="description" content="県外とは水質が違う、沖縄の水。その違いを前提に設計した5段階フィルターのラクトクウォーター。硬度調整とPFAS対策を徹底。">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -60,9 +60,23 @@
             max-width: 100%;
             height: auto;
         }
+
+        /* 泡（水玉）のアニメーション */
+        @keyframes bubble-rise {
+            0% { transform: translateY(0) scale(1); opacity: 0; }
+            50% { opacity: 0.5; }
+            100% { transform: translateY(-100px) scale(1.2); opacity: 0; }
+        }
+        .bubble {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: bubble-rise linear infinite;
+        }
     </style>
 </head>
-<body class="text-slate-700 bg-slate-50 selection:bg-cyan-100 selection:text-cyan-900">
+<body class="text-slate-700 bg-slate-50 selection:bg-cyan-100 selection:text-cyan-900 overflow-x-hidden">
 
     <!-- Navigation -->
     <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-4">
@@ -124,7 +138,7 @@
         </div>
         
         <div class="container mx-auto px-4 md:px-8 relative z-10 py-10 lg:py-0 h-full flex flex-col justify-center">
-            <div class="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8 h-full">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-8 h-full">
                 
                 <!-- Hero Content (Left) -->
                 <div class="w-full lg:w-[55%] text-center lg:text-left space-y-8 z-20">
@@ -134,7 +148,7 @@
                         </div>
                         <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-[1.15] drop-shadow-lg">
                             <span class="block">県外とは水質が違う、</span>
-                            <span class="text-cyan-100">沖縄の水だから。</span>
+                            <span class="text-cyan-100">沖縄の水。</span>
                         </h1>
                         <p class="mt-6 text-lg md:text-2xl text-white/90 font-medium leading-relaxed drop-shadow-sm max-w-2xl mx-auto lg:mx-0">
                             その違いを前提に設計した、<br class="hidden md:block">
@@ -157,42 +171,40 @@
                         </div>
                     </div>
 
-                    <!-- Products Display (重ならないように横並び・縦並びを制御) -->
-                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-8 mt-12">
+                    <!-- Products Display (サーバーとフィルター画像を大きく調整) -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mt-6 lg:mt-8 w-full">
                         <!-- Water Server Image -->
-                        <div class="relative w-[50%] sm:w-[40%] max-w-[200px] flex justify-center shrink-0">
+                        <div class="relative w-1/2 sm:w-1/3 max-w-[280px] lg:max-w-[350px] flex justify-center shrink-0 z-10">
                             <img src="https://rakutokuwater.smilegrit.com/wp-content/uploads/2026/02/琉宮祭LP素材.png"
                                  alt="Water Server"
                                  class="w-full h-auto object-contain drop-shadow-2xl animate-float"
                                  onerror="this.src='https://placehold.co/200x400/f8fafc/00a0e9?text=Server'">
                         </div>
 
-                        <!-- Filter System Image -->
-                        <div class="relative w-[90%] sm:w-[60%] max-w-[350px] group flex justify-center">
+                        <!-- Filter System Image (さらに限界まで大きく表示) -->
+                        <div class="relative w-[110%] sm:w-2/3 max-w-[600px] lg:max-w-[700px] group flex justify-center shrink-0 z-0 lg:-ml-8 mt-6 sm:mt-0">
                             <img src="https://rakutokuwater.smilegrit.com/wp-content/uploads/2026/02/①-②-③-④-⑤-1.png"
                                  alt="5-Stage Filter System"
-                                 class="w-full h-auto object-contain drop-shadow-xl rounded-lg"
+                                 class="w-full h-auto object-contain drop-shadow-xl rounded-lg transform scale-110 lg:scale-[1.3] lg:translate-x-12 origin-left transition-transform"
                                  onerror="this.src='https://placehold.co/400x150/ffffff/00a0e9?text=Filter+System'">
                         </div>
                     </div>
                 </div>
 
-                <!-- Right Side: Model & Badge (重なり解消のためレイアウト修正) -->
-                <div class="w-full lg:w-[45%] relative flex justify-center lg:justify-end items-end mt-12 lg:mt-0 pointer-events-none px-4">
-                    
+                <!-- Right Side: Model & Badge (女性モデル画像を大きく＆バッジを指先の左上に配置) -->
+                <div class="w-full lg:w-[45%] relative flex justify-center lg:justify-end items-end mt-8 lg:mt-0 pointer-events-none px-4">
                     <!-- Badge -->
-                <!-- Right Side: Model & Badge -->
-                <div class="w-full lg:w-[45%] relative flex justify-center lg:justify-end items-end mt-12 lg:mt-0 pointer-events-none px-4">
-                    <div class="absolute top-[40%] left-[-5%] md:top-[50%] md:left-[0%] lg:top-[45%] lg:-left-16 z-30 animate-float pointer-events-auto" style="animation-delay: 1s;">
+                    <div class="absolute top-[-20px] left-[5%] md:top-[5%] md:left-[10%] lg:top-[5%] lg:left-[-15%] z-30 animate-float pointer-events-auto" style="animation-delay: 1s;">
                         <div class="bg-[#00A0E9] text-white rounded-full shadow-2xl border-[4px] border-white transform -rotate-12 flex flex-col items-center justify-center w-28 h-28 md:w-36 md:h-36 text-center leading-tight hover:scale-105 transition-transform cursor-pointer">
                             <span class="font-bold text-xs md:text-sm lg:text-base">ラクトク</span>
                             <span class="font-bold text-xs md:text-sm lg:text-base">だから</span>
                             <span class="font-black text-base md:text-xl lg:text-2xl">なっとく</span>
                         </div>
                     </div>
+                    <!-- Model Image -->
                     <img src="https://rakutokuwater.smilegrit.com/wp-content/uploads/2026/02/琉宮祭LP素材-1.png"
                          alt="Smiling Staff"
-                         class="w-[100%] md:w-[85%] lg:w-[135%] max-w-none h-auto object-contain object-bottom relative z-10 drop-shadow-[-15px_0_30px_rgba(0,0,0,0.2)] origin-bottom pointer-events-auto transform lg:translate-x-12"
+                         class="w-[110%] md:w-[90%] lg:w-[150%] max-w-none h-auto object-contain object-bottom relative z-10 drop-shadow-[-15px_0_30px_rgba(0,0,0,0.2)] origin-bottom pointer-events-auto transform lg:translate-x-8 lg:-translate-y-4 lg:scale-110"
                          onerror="this.src='https://placehold.co/400x600/e0f2fe/00a0e9?text=Model+Image'">
                 </div>
             </div>
@@ -287,7 +299,7 @@
         </div>
     </section>
 
-    <!-- Content: Kids & Water -->
+    <!-- Content: Kids & Water (Happy Kids セクション) -->
     <section class="py-16 md:py-24 bg-[#E0F7FA] relative overflow-hidden">
         <div class="container mx-auto px-4 relative z-10">
             <div class="flex flex-col md:flex-row items-center gap-10 md:gap-12 lg:gap-20">
@@ -296,7 +308,7 @@
                         <div class="absolute inset-0 bg-white/20 rounded-[2rem] md:rounded-[3rem] blur-xl group-hover:bg-white/30 transition-all"></div>
                         <div class="relative rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl border-4 md:border-8 border-white transform md:-rotate-2">
                             <!-- Kids Image -->
-                            <img src="https://rakutokuwater.smilegrit.com/wp-content/uploads/2026/02/琉宮祭LP素材%20(2).png"
+                            <img src="https://rakutokuwater.smilegrit.com/wp-content/uploads/2026/02/琉宮祭LP素材-1.png"
                                  alt="Child drinking water"
                                  class="w-full h-auto object-cover aspect-[4/3]"
                                  onerror="this.src='https://placehold.co/600x450/e0f7fa/00a0e9?text=Happy+Kids'">
@@ -314,10 +326,10 @@
                         が、増える喜び。
                     </h2>
                     <p class="text-base md:text-xl text-slate-600 leading-relaxed">
-                        不純物はしっかり取り除きながら、<br class="hidden md:block">
-                        ミネラルは残したまろやかな軟水。<br><br>
-                        沖縄特有の「重さ」がないから、<br class="hidden md:block">
-                        お子様の毎日の水分補給も安心してお任せください。
+                        沖縄はミネラルが豊富な地域です。<br><br>
+                        ラクトクウォーターは、その自然のミネラルを<br class="hidden md:block">
+                        すべて取り除くのではなく、<br class="hidden md:block">
+                        活かしながら安全性を整える設計にしています。
                     </p>
                     <div class="flex flex-wrap gap-3">
                         <div class="bg-white px-4 py-2 md:px-5 md:py-2.5 rounded-full text-slate-700 font-bold shadow-md flex items-center gap-2 text-xs md:text-sm border border-cyan-100">
@@ -362,7 +374,7 @@
         </div>
     </section>
 
-    <!-- Section 4: 売り込まない理由 (修正箇所：フィルター画像に変更) -->
+    <!-- Section 4: 売り込まない理由 -->
     <section class="py-16 md:py-24 bg-white relative overflow-hidden">
         <div class="container mx-auto px-4 max-w-5xl">
             <div class="flex flex-col md:flex-row items-center gap-10 md:gap-12">
@@ -390,38 +402,38 @@
         </div>
     </section>
 
-    <!-- Section 5: 忘れて課金はしません (Trust Section) -->
+    <!-- Section 5: 安心の約束 -->
     <section class="py-16 md:py-24 bg-slate-50">
         <div class="container mx-auto px-4 max-w-4xl">
             <div class="bg-white border-2 border-cyan-100 rounded-[2rem] md:rounded-[3rem] p-8 md:p-16 text-center shadow-lg relative mt-6">
                 <div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-white px-8 py-2 rounded-full border-2 border-cyan-100 shadow-sm font-black text-cyan-500 whitespace-nowrap">安心の約束</div>
-                
                 <h2 class="text-2xl md:text-3xl font-black text-slate-800 mb-6 md:mb-10 leading-tight">
                     忘れさせて料金が始まる仕組みは、<br class="hidden md:block">取りません。
                 </h2>
-                
                 <div class="text-slate-600 text-base md:text-lg mb-8 md:mb-10 space-y-4 text-left md:text-center max-w-2xl mx-auto leading-relaxed">
                     <p>携帯会社やカード会社の「無料体験」で、いつの間にか課金が始まっていた。そんな経験がある方も多いと思います。</p>
-                    <p>ラクトクウォーターでは、無料期間が終わる前に、<strong class="text-slate-800 border-b-2 border-cyan-200">必ずこちらからご連絡します。</strong></p>
+                    <p>ラクトクウォーターでは、無料期間が終わる前に、必ずこちらからご連絡します。</p>
                 </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-10">
-                    <div class="bg-slate-50 p-5 md:p-6 rounded-2xl border border-slate-100 flex flex-col items-center gap-3">
-                        <i data-lucide="bell-ring" class="text-cyan-500 w-8 h-8"></i>
-                        <span class="font-bold text-slate-700">終了7日前にお知らせ</span>
-                    </div>
-                    <div class="bg-slate-50 p-5 md:p-6 rounded-2xl border border-slate-100 flex flex-col items-center gap-3">
-                        <i data-lucide="message-square" class="text-cyan-500 w-8 h-8"></i>
-                        <span class="font-bold text-slate-700">続けるか一緒に確認</span>
-                    </div>
-                    <div class="bg-slate-50 p-5 md:p-6 rounded-2xl border border-slate-100 flex flex-col items-center gap-3">
-                        <i data-lucide="x-circle" class="text-cyan-500 w-8 h-8"></i>
-                        <span class="font-bold text-slate-700">合わなければ終了</span>
-                    </div>
+                <div class="text-left max-w-sm mx-auto mb-8 md:mb-10 bg-slate-50 p-6 md:p-8 rounded-2xl border border-slate-100">
+                    <ul class="space-y-4 font-bold text-slate-700 text-base md:text-lg">
+                        <li class="flex items-center gap-3">
+                            <span class="text-cyan-500 font-black">・</span>
+                            終了7日前にご連絡
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-cyan-500 font-black">・</span>
+                            続けるかどうかを一緒に確認
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-cyan-500 font-black">・</span>
+                            合わなければ、そのまま終了
+                        </li>
+                    </ul>
                 </div>
 
                 <div class="bg-red-50 text-red-600 font-black py-4 md:py-5 px-4 rounded-xl text-base md:text-lg flex justify-center items-center gap-2 border border-red-100">
-                    <i data-lucide="shield-check" class="w-6 h-6"></i>
+                    <span class="text-xl md:text-2xl">👉</span>
                     勝手に課金されることはありません。
                 </div>
             </div>

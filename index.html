@@ -63,16 +63,18 @@
 
         /* 泡（水玉）のアニメーション */
         @keyframes bubble-rise {
-            0% { transform: translateY(0) scale(1); opacity: 0; }
-            50% { opacity: 0.5; }
-            100% { transform: translateY(-100px) scale(1.2); opacity: 0; }
+            0% { transform: translateY(0) scale(0.8); opacity: 0; }
+            20% { opacity: 0.6; }
+            80% { opacity: 0.4; }
+            100% { transform: translateY(-150px) scale(1.2); opacity: 0; }
         }
         .bubble {
             position: absolute;
-            background: rgba(255, 255, 255, 0.3);
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
             border-radius: 50%;
             pointer-events: none;
             animation: bubble-rise linear infinite;
+            box-shadow: inset 0 0 10px rgba(255,255,255,0.5);
         }
     </style>
 </head>
@@ -124,93 +126,99 @@
 
     <!-- Hero Section -->
     <header class="relative min-h-[100dvh] flex items-center pt-24 pb-0 overflow-hidden bg-gradient-to-br from-[#40C4FF] via-[#00A0E9] to-[#01579B]">
-        <!-- 背景装飾（水玉・泡の追加） -->
+        <!-- 背景装飾（水と光のリッチな表現） -->
         <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-            <div class="absolute -top-24 -left-24 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
-            <div class="absolute top-1/2 -right-24 w-80 h-80 bg-cyan-300/20 rounded-full blur-3xl"></div>
+            <!-- 光のグラデーション -->
+            <div class="absolute top-[-10%] left-[-10%] w-[60vw] h-[60vw] bg-white/20 rounded-full blur-3xl mix-blend-overlay"></div>
+            <div class="absolute top-[30%] right-[-20%] w-[70vw] h-[70vw] bg-cyan-300/20 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-[-10%] left-[20%] w-[50vw] h-[50vw] bg-[#40C4FF]/30 rounded-full blur-3xl"></div>
             
             <!-- 水玉（泡）のエフェクト -->
-            <div class="absolute top-[15%] left-[5%] w-6 h-6 bg-white/30 rounded-full animate-float" style="animation-duration: 3s;"></div>
-            <div class="absolute top-[30%] right-[10%] w-10 h-10 bg-white/20 rounded-full animate-float" style="animation-duration: 5s; animation-delay: 1s;"></div>
-            <div class="absolute bottom-[20%] left-[15%] w-12 h-12 bg-white/25 rounded-full animate-float" style="animation-duration: 4s; animation-delay: 2s;"></div>
-            <div class="absolute top-[60%] right-[25%] w-4 h-4 bg-white/40 rounded-full animate-float" style="animation-duration: 2.5s; animation-delay: 0.5s;"></div>
-            <div class="absolute bottom-[40%] left-[40%] w-8 h-8 bg-white/15 rounded-full animate-float" style="animation-duration: 4.5s; animation-delay: 1.5s;"></div>
+            <div class="bubble w-4 h-4 left-[10%] bottom-[10%]" style="animation-duration: 4s;"></div>
+            <div class="bubble w-8 h-8 left-[25%] bottom-[5%]" style="animation-duration: 6s; animation-delay: 1s;"></div>
+            <div class="bubble w-12 h-12 left-[45%] bottom-[15%]" style="animation-duration: 8s; animation-delay: 2s;"></div>
+            <div class="bubble w-6 h-6 left-[65%] bottom-[20%]" style="animation-duration: 5s; animation-delay: 0.5s;"></div>
+            <div class="bubble w-10 h-10 left-[85%] bottom-[10%]" style="animation-duration: 7s; animation-delay: 1.5s;"></div>
+            <div class="bubble w-16 h-16 left-[15%] bottom-[30%]" style="animation-duration: 9s; animation-delay: 3s; opacity: 0.5;"></div>
+            <div class="bubble w-5 h-5 left-[75%] bottom-[40%]" style="animation-duration: 4.5s; animation-delay: 1.2s;"></div>
+            <div class="bubble w-8 h-8 left-[55%] bottom-[50%]" style="animation-duration: 6.5s; animation-delay: 2.5s;"></div>
+            <div class="bubble w-14 h-14 right-[10%] top-[20%]" style="animation-duration: 8.5s; animation-delay: 0.2s; opacity: 0.4;"></div>
         </div>
         
         <div class="container mx-auto px-4 md:px-8 relative z-10 py-10 lg:py-0 h-full flex flex-col justify-center">
-            <div class="flex flex-col lg:flex-row items-center justify-between gap-8 h-full">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-0 lg:gap-8 h-full">
                 
                 <!-- Hero Content (Left) -->
-                <div class="w-full lg:w-[55%] text-center lg:text-left space-y-8 z-20">
+                <div class="w-full lg:w-[55%] text-center lg:text-left space-y-6 lg:space-y-8 z-20">
                     <div class="animate-fade-in-up">
-                        <div class="inline-block bg-white/20 backdrop-blur-md border border-white/30 text-white text-xs md:text-sm font-bold py-1.5 px-4 rounded-full mb-6 shadow-sm">
+                        <div class="inline-block bg-white/20 backdrop-blur-md border border-white/30 text-white text-xs md:text-sm font-bold py-1.5 px-4 rounded-full mb-4 lg:mb-6 shadow-sm">
                             沖縄の「硬水・PFAS」問題を徹底解決
                         </div>
                         <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-[1.15] drop-shadow-lg">
                             <span class="block">県外とは水質が違う、</span>
                             <span class="text-cyan-100">沖縄の水。</span>
                         </h1>
-                        <p class="mt-6 text-lg md:text-2xl text-white/90 font-medium leading-relaxed drop-shadow-sm max-w-2xl mx-auto lg:mx-0">
+                        <p class="mt-4 lg:mt-6 text-base md:text-2xl text-white/90 font-medium leading-relaxed drop-shadow-sm max-w-2xl mx-auto lg:mx-0">
                             その違いを前提に設計した、<br class="hidden md:block">
                             独自の5段階「沖縄専用」フィルター構成。
                         </p>
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-xl mx-auto lg:mx-0">
-                        <div class="glass-card border border-white/40 p-3 rounded-2xl flex items-center gap-3 shadow-lg transform hover:scale-[1.02] transition-transform">
-                            <div class="w-10 h-10 bg-cyan-500 rounded-full flex items-center justify-center text-white shrink-0">
-                                <i data-lucide="baby" class="w-5 h-5"></i>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:gap-3 max-w-xl mx-auto lg:mx-0">
+                        <div class="glass-card border border-white/40 p-2.5 lg:p-3 rounded-2xl flex items-center gap-3 shadow-lg transform hover:scale-[1.02] transition-transform text-left">
+                            <div class="w-8 h-8 lg:w-10 lg:h-10 bg-cyan-500 rounded-full flex items-center justify-center text-white shrink-0">
+                                <i data-lucide="baby" class="w-4 h-4 lg:w-5 lg:h-5"></i>
                             </div>
-                            <span class="text-[#005C8A] font-bold text-sm md:text-base">赤ちゃんも喜ぶ「超まろやか」</span>
+                            <span class="text-[#005C8A] font-bold text-xs lg:text-base leading-tight">赤ちゃんも喜ぶ<br class="sm:hidden">「超まろやか」</span>
                         </div>
-                        <div class="glass-card border border-white/40 p-3 rounded-2xl flex items-center gap-3 shadow-lg transform hover:scale-[1.02] transition-transform">
-                            <div class="w-10 h-10 bg-cyan-500 rounded-full flex items-center justify-center text-white shrink-0">
-                                <i data-lucide="shield-check" class="w-5 h-5"></i>
+                        <div class="glass-card border border-white/40 p-2.5 lg:p-3 rounded-2xl flex items-center gap-3 shadow-lg transform hover:scale-[1.02] transition-transform text-left">
+                            <div class="w-8 h-8 lg:w-10 lg:h-10 bg-cyan-500 rounded-full flex items-center justify-center text-white shrink-0">
+                                <i data-lucide="shield-check" class="w-4 h-4 lg:w-5 lg:h-5"></i>
                             </div>
-                            <span class="text-[#005C8A] font-bold text-sm md:text-base">PFASを最終段階で徹底除去</span>
+                            <span class="text-[#005C8A] font-bold text-xs lg:text-base leading-tight">PFASを最終段階で<br class="sm:hidden">徹底除去</span>
                         </div>
                     </div>
 
-                    <!-- Products Display (サーバーとフィルター画像を大きく調整) -->
-                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mt-6 lg:mt-8 w-full">
+                    <!-- Products Display (スマホ時は左寄り・重なる配置) -->
+                    <div class="flex flex-row items-center justify-center lg:justify-start gap-0 mt-4 lg:mt-8 w-full relative z-10">
                         <!-- Water Server Image -->
-                        <div class="relative w-1/2 sm:w-1/3 max-w-[280px] lg:max-w-[350px] flex justify-center shrink-0 z-10">
+                        <div class="relative w-[45%] sm:w-[40%] max-w-[200px] lg:max-w-[350px] flex justify-center shrink-0 z-20">
                             <img src="https://rakutokuwater.smilegrit.com/wp-content/uploads/2026/02/琉宮祭LP素材.png"
                                  alt="Water Server"
                                  class="w-full h-auto object-contain drop-shadow-2xl animate-float"
                                  onerror="this.src='https://placehold.co/200x400/f8fafc/00a0e9?text=Server'">
                         </div>
 
-                        <!-- Filter System Image (さらに限界まで大きく表示) -->
-                        <div class="relative w-[110%] sm:w-2/3 max-w-[600px] lg:max-w-[700px] group flex justify-center shrink-0 z-0 lg:-ml-8 mt-6 sm:mt-0">
+                        <!-- Filter System Image -->
+                        <div class="relative w-[65%] sm:w-[60%] max-w-[300px] lg:max-w-[700px] flex justify-center shrink-0 z-10 -ml-10 lg:-ml-8 transform lg:scale-[1.3] lg:translate-x-12 origin-left">
                             <img src="https://rakutokuwater.smilegrit.com/wp-content/uploads/2026/02/①-②-③-④-⑤-1.png"
                                  alt="5-Stage Filter System"
-                                 class="w-full h-auto object-contain drop-shadow-xl rounded-lg transform scale-110 lg:scale-[1.3] lg:translate-x-12 origin-left transition-transform"
+                                 class="w-full h-auto object-contain drop-shadow-xl rounded-lg"
                                  onerror="this.src='https://placehold.co/400x150/ffffff/00a0e9?text=Filter+System'">
                         </div>
                     </div>
                 </div>
 
-                <!-- Right Side: Model & Badge (女性モデル画像を大きく＆バッジを指先の左上に配置) -->
-                <div class="w-full lg:w-[45%] relative flex justify-center lg:justify-end items-end mt-8 lg:mt-0 pointer-events-none px-4">
+                <!-- Right Side: Model & Badge (スマホ時はネガティブマージンで上に被せる) -->
+                <div class="w-full lg:w-[45%] relative flex justify-end items-end -mt-20 sm:-mt-32 lg:mt-0 pointer-events-none px-2 sm:px-4 z-30">
                     <!-- Badge -->
-                    <div class="absolute top-[-20px] left-[5%] md:top-[5%] md:left-[10%] lg:top-[5%] lg:left-[-15%] z-30 animate-float pointer-events-auto" style="animation-delay: 1s;">
-                        <div class="bg-[#00A0E9] text-white rounded-full shadow-2xl border-[4px] border-white transform -rotate-12 flex flex-col items-center justify-center w-28 h-28 md:w-36 md:h-36 text-center leading-tight hover:scale-105 transition-transform cursor-pointer">
-                            <span class="font-bold text-xs md:text-sm lg:text-base">ラクトク</span>
-                            <span class="font-bold text-xs md:text-sm lg:text-base">だから</span>
-                            <span class="font-black text-base md:text-xl lg:text-2xl">なっとく</span>
+                    <div class="absolute top-[5%] left-[5%] md:top-[10%] md:left-[15%] lg:top-[5%] lg:left-[-15%] z-30 animate-float pointer-events-auto" style="animation-delay: 1s;">
+                        <div class="bg-[#00A0E9] text-white rounded-full shadow-2xl border-[3px] md:border-[4px] border-white transform -rotate-12 flex flex-col items-center justify-center w-20 h-20 md:w-28 md:h-28 lg:w-36 lg:h-36 text-center leading-tight hover:scale-105 transition-transform cursor-pointer">
+                            <span class="font-bold text-[10px] md:text-sm lg:text-base">ラクトク</span>
+                            <span class="font-bold text-[10px] md:text-sm lg:text-base">だから</span>
+                            <span class="font-black text-sm md:text-xl lg:text-2xl">なっとく</span>
                         </div>
                     </div>
-                    <!-- Model Image -->
+                    <!-- Model Image (右寄せで配置) -->
                     <img src="https://rakutokuwater.smilegrit.com/wp-content/uploads/2026/02/琉宮祭LP素材-1.png"
                          alt="Smiling Staff"
-                         class="w-[110%] md:w-[90%] lg:w-[150%] max-w-none h-auto object-contain object-bottom relative z-10 drop-shadow-[-15px_0_30px_rgba(0,0,0,0.2)] origin-bottom pointer-events-auto transform lg:translate-x-8 lg:-translate-y-4 lg:scale-110"
+                         class="w-[75%] sm:w-[65%] lg:w-[150%] max-w-none h-auto object-contain object-bottom relative z-10 drop-shadow-[-15px_0_30px_rgba(0,0,0,0.2)] origin-bottom pointer-events-auto transform lg:translate-x-8 lg:-translate-y-4 lg:scale-110 ml-auto"
                          onerror="this.src='https://placehold.co/400x600/e0f2fe/00a0e9?text=Model+Image'">
                 </div>
             </div>
         </div>
 
-        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-10">
+        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-40">
             <svg class="relative block w-full h-10 md:h-20" viewBox="0 0 1200 120" preserveAspectRatio="none">
                 <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" fill="#f8fafc"></path>
             </svg>
